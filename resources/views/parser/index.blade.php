@@ -8,9 +8,9 @@
 		</div>
 		<div class="loading-url"></div>
 		<div>
-			<form method="get" action="/parser/parse2/">
+			<form method="get" action="/parser/parse/">
 				<label for="count">Количество:</label>
-				<input type="input" id="count" name="count" value="500" />									
+				<input type="input" id="count" name="count" value="50" />									
 				<input type="submit" id="parse_btn" class="btn btn-default"  value="Парсинг" />
 			</form>
 		</div>

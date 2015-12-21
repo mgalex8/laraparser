@@ -5,16 +5,6 @@ use Illuminate\Http\Request;
 
 class ParserController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Welcome Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders the "marketing page" for the application and
-	| is configured to only allow guests. Like most of the other sample
-	| controllers, you are free to modify or remove it as you desire.
-	|
-	*/
 	
 	private $link_tpl = 'http://rostov.hh.ru/vacancy/';
 	
@@ -40,47 +30,7 @@ class ParserController extends Controller {
 		return view('parser.index');
 	}
 	
-	 
 	public function parse(Request $request)	
-	{
-		if ($request->has('count')) {
-			$count = $request->input('count');
-		}
-		else {
-			$count = 10;
-		}
-		
-		// Parsing
-		$success = false; 
-		for ($i=0; $i<$count; $i++) 
-		{
-			//парсим следующую вакансию
-			$ret = $this->parseNext();
-			if ($ret) {
-				$success = true;
-				$links[] = $ret;
-			}
-			else {
-				$errors[] = $ret;
-			}
-		}			
-		
-		if ($success == true) {
-			return json_encode(array(
-				'success' => 1,
-				'links' => $links,
-			));	
-		}
-		else {
-			$json['success'] = 0;
-			if (isset($errors) && count($errors) > 0) {
-				$json['errors'] = $errors;
-			}
-			return json_encode($json);
-		}
-	}
-
-	public function parse2(Request $request)	
 	{
 		if ($request->has('count')) {
 			$count = $request->input('count');
