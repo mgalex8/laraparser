@@ -195,6 +195,13 @@ class Vacancy extends Model
 			if ($city = $cities->where('name','=',$cityName)->first()) {
 				$vacancy->city_id = $city->id;
 			}
+			else {
+				// save new city
+				$city = new City;
+				$city->name = $cityName;
+				$city->save();
+				$vacancy->city_id = $city->id;
+			}
 		}
 		if (isset($experience)) {
 			$vacancy->experience = $experience;
@@ -219,6 +226,7 @@ class Vacancy extends Model
 					$empIds[] = $find->id; 
 				}
 				else {
+					// save new EmploymentType
 					$employ = new EmploymentType;
 					$employ->name = $emp;
 					$employ->save();

@@ -78,35 +78,7 @@ class ParserController extends Controller {
 			}
 			return json_encode($json);
 		}
-	}
-
-	public function parse2(Request $request)	
-	{
-		if ($request->has('count')) {
-			$count = $request->input('count');
-		}
-		else {
-			$count = 10;
-		}
-		
-		// Parsing
-		$success = false; 
-		for ($i=0; $i<$count; $i++) 
-		{
-			//парсим следующую вакансию
-			$ret = $this->parseNext();
-			if ($ret) {
-				$success = true;
-				$links = $ret;
-				echo $links.'</br>';
-			}
-			else {
-				$errors = $ret;
-				echo $error.'</br>';
-			}
-		}
-	}
-	
+	}	
 	
 	public function count() 
 	{

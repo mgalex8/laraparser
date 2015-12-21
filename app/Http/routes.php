@@ -18,5 +18,3 @@ Route::get('vacancy/view/{id}', 'VacancyController@view');
 
 Route::get('parser', 'ParserController@index');
 Route::get('parser/parse', 'ParserController@parse');
-Route::get('parser/parse2', 'ParserController@parse2');
-
