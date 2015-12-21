@@ -15,25 +15,13 @@ class Vacancy extends Model
 		
 	
 	public function city() {
-		return $this->hasOne('App\Http\Model\City');
+		return $this->hasOne('App\City');
 	}
 	
 	public function employmentTypes() {
 		return $this->belongsToMany('App\EmploymentType', 'vacancy_employments', 'vacancy_id', 'employment_id');
 	}
-	
-	public function getHtmlDom($link) 
-	{		
-		try {
-			$html = new \Htmldom;
-			$html->file_get_html($link);
-		}
-		catch (\Exception $e) {		
-			return false;	
-		}		
-		return $html;		
-	}
-	
+		
 	
 	public function maxId()
 	{
@@ -50,7 +38,21 @@ class Vacancy extends Model
 		else {
 			return null;
 		}		
-	}		
+	}
+	
+	
+	public function getHtmlDom($link) 
+	{		
+		try {
+			$html = new \Htmldom;
+			$html->file_get_html($link);
+		}
+		catch (\Exception $e) {		
+			return false;	
+		}		
+		return $html;		
+	}
+			
 
 	public function parse($html, $hhId, $link = null) 
 	{
@@ -107,43 +109,27 @@ class Vacancy extends Model
 				}
 			}			
 			if (!empty($salaryText)) {
-				$salaryEmpty = 'з/п не указана';
-				$Encoding1 = mb_detect_encoding($salaryText);
-				$Encoding22 = mb_detect_encoding($salaryEmpty);
-								
 				if (!preg_match('/[\d]{1}/i', $salaryText)) {
 					$salary_from = 0;
 					$salary_to = 0;
 				}
 				else {
-					$salary = explode('до', $salaryText);												 	
-					if (count($salary) == 1) {
-						preg_match_all('/[\w]{2}(.*)[\w]{2,3}/', $salary[0], $matches);						
+					$salary = explode('до', $salaryText);	
+					
+					if (isset($salary[0]) && strlen( trim( $salary[0])) > 0) 
+					{
+						preg_match_all('/[\w]{2}(.*)[\w\s\.]{1,4}/', $salary[0], $matches);							
 						$str = str_replace(chr(194).chr(160), '', $matches[0][0]);
 						$str = str_replace(' ', '', $str);
-						$salary_from = intval($str);				 
+						$salary_from = intval($str);
 					}
-					elseif (count($salary) == 2) {
-						if (strlen(trim($salary[0])) == 0) {
-							$salary_from = 0;
-							
-							preg_match_all('/[\w]{2}(.*)[\w]{2,3}/', $salary[1], $matches);				
-							$str = str_replace(chr(194).chr(160), '', $matches[0][0]);
-							$str = str_replace(' ', '', $str);
-							$salary_to = intval($str);
-						}
-						else {
-							preg_match_all('/[\w]{2}(.*)[\w]{2,3}/', $salary[0], $matches);														
-							$str = str_replace(chr(194).chr(160), '', $matches[0][0]);
-							$str = str_replace(' ', '', $str);
-							$salary_from = intval($str);
-											
-							preg_match_all('/[\w]{2}(.*)[\w]{2,3}/', $salary[1], $matches);				
-							$str = str_replace(chr(194).chr(160), '', $matches[0][0]);
-							$str = str_replace(' ', '', $str);
-							$salary_to = intval($str);
-						}												
-					}
+					if (isset($salary[1]) && strlen( trim( $salary[1])) > 0)
+					{
+						preg_match_all('/[\w\s]{1,2}(.*)[\w\s]{1,3}/', $salary[1], $matches);				
+						$str = str_replace(chr(194).chr(160), '', $matches[0][0]);
+						$str = str_replace(' ', '', $str);
+						$salary_to = intval($str);
+					}					
 				}
 			}
 			

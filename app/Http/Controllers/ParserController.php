@@ -46,7 +46,8 @@ class ParserController extends Controller {
 		
 		// Parsing
 		$success = false; 
-		for ($i=0; $i<$count; $i++) {
+		for ($i=0; $i<$count; $i++) 
+		{
 			$ret = $this->parseNext();
 			if ($ret) {
 				$success = true;
@@ -70,9 +71,9 @@ class ParserController extends Controller {
 			}
 			return json_encode($json);
 		}
-	}	
+	}
 	
-
+	
 	public function count() 
 	{
 		$vacancy = new Vacancy;
@@ -137,7 +138,7 @@ class ParserController extends Controller {
 		
 		if ($ret = $vacancy->parse($html, $hhId, $link)) {
 			return $link;
-			
+						
 		}
 		else {
 			return $ret;

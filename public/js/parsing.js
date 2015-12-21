@@ -2,12 +2,13 @@ $(document).ready(function(){
 	
 	$('#parse_btn').click(function()
 	{		
-		var maximum = 50;		
+		var maximum = $('#maximum').val();
 		var parseCount = 5;
 		var parseGroupIteration = Math.trunc(maximum / parseCount);
 		
 		$('.loading').data('count', 0);
-		$('.loading-bar').css('width', 0);				
+		$('.loading-bar').css('width', 0);
+		$('.loading-url').html('Loading...');				
 		
 		var maxWidth = 744;		
 		
@@ -35,6 +36,7 @@ $(document).ready(function(){
 							var barWidth = maxWidth;							
 							$('.loading').data('count', maximum);
 							$('.loading-bar').css('width', barWidth);
+							$('.loading-url').html('Complete');
 						}
 						else {
 							var barWidth = Math.trunc(maxWidth / maximum * count);							

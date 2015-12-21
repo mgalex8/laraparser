@@ -13,9 +13,7 @@
 
 Route::get('/', 'SiteController@index');
 
-Route::get('home', 'HomeController@index');
 Route::any('parser', 'ParserController@index');
-Route::any('parser/test', 'ParserController@test');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

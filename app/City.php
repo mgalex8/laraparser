@@ -14,7 +14,7 @@ class City extends Model
     protected $table = 'cities';
 	
 	public function vacancy() {
-		return $this->hasMany('App\Http\Model\Vacancy');
+		return $this->hasMany('App\Vacancy');
 	}
 	
 }
