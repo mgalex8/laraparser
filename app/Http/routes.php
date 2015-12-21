@@ -13,9 +13,10 @@
 
 Route::get('/', 'SiteController@index');
 
-Route::any('parser', 'ParserController@index');
+Route::get('vacancy', 'VacancyController@index');
+Route::get('vacancy/view/{id}', 'VacancyController@view');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::get('parser', 'ParserController@index');
+Route::get('parser/parse', 'ParserController@parse');
+Route::get('parser/parse2', 'ParserController@parse2');
+

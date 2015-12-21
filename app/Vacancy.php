@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\DB;
 
 class Vacancy extends Model
 {
@@ -15,7 +16,7 @@ class Vacancy extends Model
 		
 	
 	public function city() {
-		return $this->hasOne('App\City');
+		return $this->belongsTo('App\City', 'city_id', 'id');
 	}
 	
 	public function employmentTypes() {
@@ -38,9 +39,11 @@ class Vacancy extends Model
 		else {
 			return null;
 		}		
-	}
+	}	
 	
-	
+	//функция парсит страницу
+	//возвращает false в случае ошибки
+	//
 	public function getHtmlDom($link) 
 	{		
 		try {
@@ -54,15 +57,17 @@ class Vacancy extends Model
 	}
 			
 
-	public function parse($html, $hhId, $link = null) 
+	// Функция парсит код html и записывает данные в базу
+	//
+	public function parseAndSave($html, $hhId, $link = null) 
 	{
 		if (!$html) {
-			$error = 'Parse error';
+			return 'Parse error';
 		}	
 		
 		$vacancy = new Vacancy;
 		if ($vacancy->where('hh_id','=',$hhId)->first()) {
-			$error = 'Vacancy found in database';
+			return 'Vacancy '.$hhId.' found in database';
 		}
 		
 		
@@ -203,7 +208,7 @@ class Vacancy extends Model
 				
 		// save	
 		if (!$vacancy->save()) {
-			$error = 'Vacancy not saved';
+			return 'Vacancy not saved';
 		}
 		
 		// Employment Types Save
@@ -224,11 +229,7 @@ class Vacancy extends Model
 			$vacancy->employmentTypes()->attach($empIds);				
 		}
 		
-		if (!empty($error)) {
-			return $error;
-		} else {
-			return true;
-		}
+		return true;		
 	}	
 	
 }

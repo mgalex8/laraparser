@@ -1,6 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-class SiteController extends Controller {
+use App\Vacancy;
+use Illuminate\Http\Request;
+
+class VacancyController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -29,8 +32,25 @@ class SiteController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
-		return view('site.index');
+	{					
+		$vacancies = Vacancy::paginate(10);
+		
+		return view('vacancy.index', array(
+			'vacancies' => $vacancies,			
+		));
 	}
+	
+	
+	public function view(Request $request, $id)
+	{					
+		$vacancy = Vacancy::find($id);		
+		
+		$page = $request->input('backpage');	
+		
+		return view('vacancy.view', array(
+			'vacancy' => $vacancy,
+			'backpage' => $page,
+		));
+	}	
 
 }

@@ -14,7 +14,7 @@ $(document).ready(function(){
 		
 		for(i=0; i<parseGroupIteration; i++) {
 			$.ajax({
-				url: '/parser/',
+				url: '/parser/parse/',
 				method:'get',
 				data:{
 					count: parseCount,

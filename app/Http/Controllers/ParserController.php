@@ -35,7 +35,13 @@ class ParserController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request)	
+	public function index()
+	{
+		return view('parser.index');
+	}
+	
+	 
+	public function parse(Request $request)	
 	{
 		if ($request->has('count')) {
 			$count = $request->input('count');
@@ -48,6 +54,7 @@ class ParserController extends Controller {
 		$success = false; 
 		for ($i=0; $i<$count; $i++) 
 		{
+			//парсим следующую вакансию
 			$ret = $this->parseNext();
 			if ($ret) {
 				$success = true;
@@ -72,6 +79,33 @@ class ParserController extends Controller {
 			return json_encode($json);
 		}
 	}
+
+	public function parse2(Request $request)	
+	{
+		if ($request->has('count')) {
+			$count = $request->input('count');
+		}
+		else {
+			$count = 10;
+		}
+		
+		// Parsing
+		$success = false; 
+		for ($i=0; $i<$count; $i++) 
+		{
+			//парсим следующую вакансию
+			$ret = $this->parseNext();
+			if ($ret) {
+				$success = true;
+				$links = $ret;
+				echo $links.'</br>';
+			}
+			else {
+				$errors = $ret;
+				echo $error.'</br>';
+			}
+		}
+	}
 	
 	
 	public function count() 
@@ -87,7 +121,8 @@ class ParserController extends Controller {
 	
 	protected function parseNext() 
 	{	
-		//get hh id
+		//Получаем последний hh id из базы и увеличиваем на 1
+		//если база пустая берем значение по умолчанию
 		$vacancy = new Vacancy;
 		$lastId = $vacancy->maxId();
 		if ($lastId) {
@@ -108,7 +143,7 @@ class ParserController extends Controller {
 		// Simple HTML Dom
 		//Ищем страницу вакансии
 		//если есть в базе вычисляем новый Id
-		//Парсинг страниц ведется сначала в большую сторону
+		//Получение страниц ведется сначала в большую сторону
 		//если превышен лимит, меняем направление
 		$index = 0;
 		$maxLoadIndex = 10;
@@ -136,7 +171,10 @@ class ParserController extends Controller {
 			$html = $vacancy->getHtmlDom($link);				
 		}	
 		
-		if ($ret = $vacancy->parse($html, $hhId, $link)) {
+		// парсинг полученной страницы вакансии
+		// и запись в базу
+		$ret = $vacancy->parseAndSave($html, $hhId, $link);
+		if ($ret === true) {
 			return $link;
 						
 		}

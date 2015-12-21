@@ -38,13 +38,25 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="<?php echo e(url('/')); ?>">Home</a></li>
+					<li><a href="<?php echo e(url('/vacancy/')); ?>">Вакансии</a></li>
+					<li><a href="<?php echo e(url('/parser/')); ?>">Парсинг</a></li>
 				</ul>				
 			</div>
 		</div>
 	</nav>
+	
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
 
 	<?php echo $__env->yieldContent('content'); ?>
+	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 	
 </body>
 </html>

@@ -1,4 +1,6 @@
-<?php $__env->startSection('content'); ?>				
+@extends('app')
+
+@section('content')				
 	<div class="panel-heading">Parser</div>
 	<div class="panel-body">
 		<div class="loading" data-count="0">
@@ -12,9 +14,7 @@
 		</div>
 	</div>
 				
-<script src="<?php echo e(asset('/js/parsing.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
+<script src="{{ asset('/js/parsing.js') }}"></script>
+@endsection
 
 
-
-<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
