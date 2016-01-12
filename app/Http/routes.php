@@ -19,3 +19,7 @@ Route::get('vacancy/view/{id}', 'VacancyController@view');
 Route::get('parser', 'ParserController@index');
 Route::get('parser/parse', 'ParserController@parse');
 
+Route::get('nokogiri', 'NokogiriController@index');
+Route::get('nokogiri/parse', 'NokogiriController@parse');
+Route::get('nokogiri/parsePage', 'NokogiriController@parsePage');
+

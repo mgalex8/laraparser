@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2971298aed0c07313f186be8b41a3dcd",
-    "content-hash": "07353743e53884c2331f05c511e4835a",
+    "hash": "6764bd5590767b144658c5de2b50bced",
+    "content-hash": "a0acd8e44b879a55dd5c4117d19a5dd8",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -832,6 +832,50 @@
                 "php"
             ],
             "time": "2015-09-19 14:15:08"
+        },
+        {
+            "name": "olamedia/nokogiri",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/olamedia/nokogiri.git",
+                "reference": "d9c942a60a2b397eaea3c902a03e45c8010f4e48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/olamedia/nokogiri/zipball/d9c942a60a2b397eaea3c902a03e45c8010f4e48",
+                "reference": "d9c942a60a2b397eaea3c902a03e45c8010f4e48",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "nokogiri.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "olamedia",
+                    "email": "olamedia@gmail.com",
+                    "homepage": "http://github.com/olamedia",
+                    "role": "Developer"
+                }
+            ],
+            "description": "HTML Parser",
+            "homepage": "http://github.com/olamedia/nokogiri",
+            "keywords": [
+                "html",
+                "parse",
+                "parser"
+            ],
+            "time": "2015-05-19 18:39:31"
         },
         {
             "name": "psr/log",

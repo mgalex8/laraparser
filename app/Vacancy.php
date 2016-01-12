@@ -238,7 +238,8 @@ class Vacancy extends Model
 		}
 		
 		return true;		
-	}	
+	}
+                        
 	
 }
 

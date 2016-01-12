@@ -3061,5 +3061,51 @@
             "HTML Parser",
             "laravel"
         ]
+    },
+    {
+        "name": "olamedia/nokogiri",
+        "version": "1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/olamedia/nokogiri.git",
+            "reference": "d9c942a60a2b397eaea3c902a03e45c8010f4e48"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/olamedia/nokogiri/zipball/d9c942a60a2b397eaea3c902a03e45c8010f4e48",
+            "reference": "d9c942a60a2b397eaea3c902a03e45c8010f4e48",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "time": "2015-05-19 18:39:31",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "nokogiri.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "olamedia",
+                "email": "olamedia@gmail.com",
+                "homepage": "http://github.com/olamedia",
+                "role": "Developer"
+            }
+        ],
+        "description": "HTML Parser",
+        "homepage": "http://github.com/olamedia/nokogiri",
+        "keywords": [
+            "html",
+            "parse",
+            "parser"
+        ]
     }
 ]
